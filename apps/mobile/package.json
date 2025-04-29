@@ -1,0 +1,8 @@
+{
+  "name": "@scores3093/mobile",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "mobile"
+  }
+}
