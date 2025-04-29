@@ -1,7 +1,14 @@
 {
   "extends": "../../tsconfig.base.json",
   "files": [],
-  "include": [],
+  "include": [
+    "nativewind-env.d.ts"
+  ],
+  "compilerOptions": {
+    "types": [
+      "nativewind/types"
+    ]
+  },
   "references": [
     {
       "path": "./tsconfig.app.json"

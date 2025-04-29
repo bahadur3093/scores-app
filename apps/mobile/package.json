@@ -4,5 +4,11 @@
   "private": true,
   "nx": {
     "name": "mobile"
+  },
+  "dependencies": {
+    "nativewind": "^4.1.23"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.4"
   }
 }

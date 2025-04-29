@@ -1,10 +1,7 @@
-import {
-  SafeAreaView,
-  Text,
-  StatusBar,
-} from 'react-native';
-export const App = () => {
+import { SafeAreaView, Text, StatusBar, View } from 'react-native';
+import '../global.css';
 
+export const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -13,7 +10,9 @@ export const App = () => {
           flex: 1,
         }}
       >
-        <Text>Welcome  I start building now </Text>
+        <View className="flex-1 justify-center items-center bg-white">
+          <Text className="text-red-500 text-xl font-bold">Hello</Text>
+        </View>
       </SafeAreaView>
     </>
   );
