@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useCallback } from 'react';
 
 import { getPosts } from '../services/post.service';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -10,7 +11,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Loader from '../components/Loader';
 import FailedRequest from '../components/FailedRequest';
 import BlogCard from '../components/BlogCard';
-import { useCallback } from 'react';
 
 const BlogScreen = () => {
   const navigation =
@@ -66,29 +66,35 @@ const BlogScreen = () => {
   }
 
   return (
-    <ScrollView
-      className="flex-1 bg-gray-100"
-      showsVerticalScrollIndicator={false}
-    >
-      <View className="mt-4 flex justify-end items-end px-4">
-        <View className="flex flex-row items-center bg-blue-600 p-3 rounded-full shadow-lg">
-          <Ionicons name="add" size={24} color="white" style={{ marginRight: 8 }} />
+    <View className="relative">
+      <View className="absolute z-40 flex justify-center items-center bottom-6 right-5 w-14 h-14">
+        <View className="flex justify-center items-center bg-blue-600 w-full h-full rounded-full shadow-lg">
           <Text
-        className="text-white font-bold text-center"
-        onPress={() =>
-          navigation.navigate('blog', { screen: 'createPost' })
-        }
+            className="text-white font-bold text-center"
+            onPress={() =>
+              navigation.navigate('blog', { screen: 'createPost' })
+            }
           >
-        Create new post
+            <Ionicons
+              name="add"
+              size={24}
+              color="white"
+              style={{ marginRight: 8 }}
+            />
           </Text>
         </View>
       </View>
-      <View className="p-4">
-        {posts &&
-          posts.length > 0 &&
-          posts.map((post) => <BlogCard key={post.id} post={post} />)}
-      </View>
-    </ScrollView>
+      <ScrollView
+        className="bg-gray-100 relative"
+        showsVerticalScrollIndicator={false}
+      >
+        <View className="p-4">
+          {posts &&
+            posts.length > 0 &&
+            posts.map((post) => <BlogCard key={post.id} post={post} />)}
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
