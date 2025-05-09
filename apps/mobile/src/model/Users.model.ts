@@ -1,8 +1,19 @@
 export interface User {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    createdAt: string;
-    updatedAt: string;
+  name: string;
+  email: string;
+  createdAt: string;
+  role: string;
+}
+
+export interface IRegisterUserPayload {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface IRegisterUserResult {
+  success: boolean;
+  message: string;
+  token: string;
+  alreadyRegistered: boolean;
 }

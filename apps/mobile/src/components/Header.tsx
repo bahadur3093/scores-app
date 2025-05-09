@@ -7,27 +7,27 @@ const Header = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <View className="mb-6 w-2/3 bg-white shadow-lg flex-row justify-around items-center h-24 border-t border-gray-200 rounded-3xl">
-      <TouchableOpacity
+    <View className="mb-6 w-2/5 bg-white shadow-lg flex-row justify-around items-center h-12 border-t border-gray-200 rounded-3xl">
+      {/* <TouchableOpacity
         className="flex items-center"
         onPress={() => navigation.navigate('home')}
       >
-        <Ionicons name="home" size={48} color="black" />
-      </TouchableOpacity>
+        <Ionicons name="home" size={24} color="black" />
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         className="flex items-center"
-        onPress={() => navigation.navigate('blog')}
+        onPress={() => navigation.navigate('login')}
       >
-        <Ionicons name="book" size={48} color="black" />
+        <Ionicons name="book" size={24} color="black" />
       </TouchableOpacity>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         className="flex items-center"
-        onPress={() => navigation.navigate('profile')}
+        onPress={() => navigation.navigate('login')}
       >
-        <Ionicons name="person" size={48} color="black" />
-      </TouchableOpacity>
+        <Ionicons name="person" size={24} color="black" />
+      </TouchableOpacity> */}
     </View>
   );
 };

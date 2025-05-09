@@ -1,6 +1,13 @@
 export type RootStackParamList = {
-    home: undefined;
-    blog: undefined;
-    profile: undefined;
-    createUser: undefined;
+  home: undefined;
+  blog: {
+    screen?: 'blogHome' | 'postDetails' | 'createPost';
+    params?: {
+      postId?: string;
+    };
   };
+  profile: undefined;
+  createUser: undefined;
+  register: undefined;
+  login: undefined;
+};
