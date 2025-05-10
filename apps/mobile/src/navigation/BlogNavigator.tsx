@@ -5,7 +5,7 @@ import BlogScreen from '../screens/Blog';
 import PostDetails from '../screens/PostDetails';
 import CreatePost from '../screens/CreatePost';
 
-type BlogStackParamList = {
+export type BlogStackParamList = {
   blogHome: undefined;
   postDetails: { postId: string };
   createPost: undefined;
@@ -25,7 +25,7 @@ const BlogNavigator = () => {
         name="postDetails"
         component={PostDetails}
         options={({ navigation }) => ({
-          header: (props) => (
+          header: () => (
             <TabHeader navigation={navigation} title="Post Details" />
           ),
           presentation: 'modal',
@@ -35,7 +35,7 @@ const BlogNavigator = () => {
         name="createPost"
         component={CreatePost}
         options={({ navigation }) => ({
-          header: (props) => (
+          header: () => (
             <TabHeader navigation={navigation} title="Create Post" />
           ),
           presentation: 'modal',

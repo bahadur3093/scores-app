@@ -1,7 +1,15 @@
 import { Ionicons } from '@expo/vector-icons';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-const TabHeader = ({ navigation, title }) => {
+import { StackNavigationProp } from '@react-navigation/stack';
+import { BlogStackParamList } from '../navigation/BlogNavigator';
+
+type TabHeaderProps = {
+  navigation: StackNavigationProp<BlogStackParamList>;
+  title: string;
+};
+
+const TabHeader = ({ navigation, title }: TabHeaderProps) => {
   return (
     <View className="flex-row items-center justify-between p-4 bg-gray-100">
       <TouchableOpacity onPress={() => navigation.goBack()}>
