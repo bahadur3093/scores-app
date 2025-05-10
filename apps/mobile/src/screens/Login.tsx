@@ -13,6 +13,7 @@ import {
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { getLoginUser } from '../services/auth.service';
+import { useUser } from '../store/UserContext';
 import { RootStackParamList } from '../types/App.types';
 
 interface IUser {
@@ -23,6 +24,7 @@ interface IUser {
 const LoginScreen = () => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const { setUser } = useUser();
   const [formData, setFormData] = useState<IUser>({
     email: '',
     password: '',
@@ -34,13 +36,17 @@ const LoginScreen = () => {
       return;
     }
     try {
-      const user = await getLoginUser({
+      const { user, token } = await getLoginUser({
         email: formData.email.toLowerCase(),
         password: formData.password,
       });
-      if (user.token) {
-        await AsyncStorage.setItem('userToken', user.token);
-        navigation.navigate('blog');
+      if (token) {
+        await AsyncStorage.multiSet([
+          ['userToken', token],
+          ['userDetails', JSON.stringify(user)],
+        ]);
+        setUser(user); // Update the context with the user data
+        navigation.navigate('home');
       }
     } catch (error) {
       setFormData({ email: '', password: '' });
@@ -58,7 +64,7 @@ const LoginScreen = () => {
     const checkToken = async () => {
       const token = await AsyncStorage.getItem('userToken');
       if (token) {
-        navigation.navigate('blog');
+        navigation.navigate('home');
       }
     };
     checkToken();

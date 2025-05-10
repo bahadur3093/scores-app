@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 
 import { store } from '../store/store';
 import AppNavigator from '../navigation/AppNavigator';
+import { UserProvider } from '../store/UserContext';
 
 //Tailwind styles don't remove this
 import '../global.css';
@@ -17,7 +18,9 @@ export const App = () => {
     <GestureHandlerRootView className="flex-1">
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
-          <AppNavigator />
+          <UserProvider>
+            <AppNavigator />
+          </UserProvider>
         </QueryClientProvider>
       </Provider>
     </GestureHandlerRootView>

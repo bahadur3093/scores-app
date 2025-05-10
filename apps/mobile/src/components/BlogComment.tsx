@@ -36,7 +36,7 @@ const BlogComment = ({ postId }: IBlogComment) => {
   return (
     <View>
       <Text className="text-xl font-bold text-gray-900 my-2">Comments</Text>
-      {comments?.map((comment) => (
+      {comments && comments?.map((comment) => (
         <CommentCard key={comment._id} comment={comment} />
       ))}
     </View>

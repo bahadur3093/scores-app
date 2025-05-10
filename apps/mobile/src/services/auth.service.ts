@@ -7,6 +7,7 @@ import {
   IRegisterUserPayload,
   IRegisterUserResult,
 } from '../model/Users.model';
+import { IAuthUser, IAuthUserResponse } from '../model/Auth.model';
 
 export const getLoginUser = async ({
   email,
@@ -14,7 +15,7 @@ export const getLoginUser = async ({
 }: {
   email: string;
   password: string;
-}): Promise<{ token: string }> => {
+}): Promise<IAuthUserResponse> => {
   const user = await api.post(API_URL.auth.login, {
     email,
     password,
@@ -27,7 +28,7 @@ export const logoutUser = async (): Promise<{ message: string }> => {
   const user = await api.get(API_URL.auth.logout, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  await AsyncStorage.removeItem('userToken');
+  await AsyncStorage.clear();
   return user.data;
 };
 
@@ -44,12 +45,12 @@ export const registerUser = async ({
   return user.data;
 };
 
-export const getUserProfile = async (): Promise<{ user: any }> => {
+export const getUserProfile = async (): Promise<{ user: IAuthUser }> => {
   const token = await getToken();
   const user = await api.get(API_URL.auth.profile(), {
     headers: { Authorization: `Bearer ${token}` },
   });
-  return user.data;
+  return { user: user.data };
 };
 
 export const validateToken = async (
