@@ -1,10 +1,17 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
+import TabHeader from '../components/TabHeader';
 import BlogScreen from '../screens/Blog';
 import PostDetails from '../screens/PostDetails';
 import CreatePost from '../screens/CreatePost';
 
-const BlogStack = createStackNavigator();
+type BlogStackParamList = {
+  blogHome: undefined;
+  postDetails: { postId: string };
+  createPost: undefined;
+};
+
+const BlogStack = createStackNavigator<BlogStackParamList>();
 
 const BlogNavigator = () => {
   return (
@@ -17,16 +24,22 @@ const BlogNavigator = () => {
       <BlogStack.Screen
         name="postDetails"
         component={PostDetails}
-        options={{ headerShown: false, title: 'Post Details', presentation: 'modal' }}
+        options={({ navigation }) => ({
+          header: (props) => (
+            <TabHeader navigation={navigation} title="Post Details" />
+          ),
+          presentation: 'modal',
+        })}
       />
       <BlogStack.Screen
         name="createPost"
         component={CreatePost}
-        options={{
-          headerShown: false,
-          title: 'Create Post',
+        options={({ navigation }) => ({
+          header: (props) => (
+            <TabHeader navigation={navigation} title="Create Post" />
+          ),
           presentation: 'modal',
-        }}
+        })}
       />
     </BlogStack.Navigator>
   );
