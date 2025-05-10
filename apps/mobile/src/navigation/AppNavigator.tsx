@@ -1,19 +1,19 @@
 import { ActivityIndicator, View } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useEffect, useState } from 'react';
 
-import { RootStackParamList } from '../types/App.types';
 import Layout from '../components/Layout';
+import { isTokenValid } from '../utils/auth.utils';
 
 // Screens
 import HomeScreen from '../screens/Home';
 import LoginScreen from '../screens/Login';
-import UserHeader from '../components/UserHeader';
 import BlogNavigator from './BlogNavigator';
-import { useEffect, useState } from 'react';
-import { isTokenValid } from '../utils/auth.utils';
+import Header from '../components/Header';
+import ProfileScreen from '../screens/Profile';
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Drawer = createDrawerNavigator();
 
 const AppNavigator = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -38,39 +38,15 @@ const AppNavigator = () => {
     <View className="h-full flex-1 bg-gray-100 relative">
       <NavigationContainer>
         <Layout>
-          <Stack.Navigator
+          <Drawer.Navigator
             initialRouteName={isAuthenticated ? 'home' : 'login'}
+            drawerContent={(props) => <Header {...props} />}
           >
-            <Stack.Screen
-              name="home"
-              component={HomeScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="blog"
-              component={BlogNavigator}
-              options={{
-                gestureEnabled: false,
-                header: () => <UserHeader title="Blogs" />,
-              }}
-            />
-            {/* <Stack.Screen
-              name="profile"
-              component={ProfileScreen}
-              options={{
-                headerShown: false,
-              }}
-            /> */}
-            <Stack.Screen
-              name="login"
-              component={LoginScreen}
-              options={{
-                headerShown: false,
-              }}
-            />
-          </Stack.Navigator>
+            <Drawer.Screen name="home" component={HomeScreen} />
+            <Drawer.Screen name="blogs" component={BlogNavigator} />
+            <Drawer.Screen name="login" component={LoginScreen} />
+            <Drawer.Screen name="profile" component={ProfileScreen} />
+          </Drawer.Navigator>
         </Layout>
       </NavigationContainer>
     </View>

@@ -1,11 +1,18 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+
+import { User } from '../model/Users.model';
 
 export const getToken = async () => {
   const token = await AsyncStorage.getItem('userToken');
   return token;
 };
 
+export const getUserDetails = async (): Promise<User | null> => {
+  const userDetails = await AsyncStorage.getItem('userDetails');
+  if (!userDetails) return null;
+  return JSON.parse(userDetails);
+};
 
 export const isTokenValid = async () => {
   const token = await getToken();
