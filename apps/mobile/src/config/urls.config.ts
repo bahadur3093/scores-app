@@ -1,3 +1,5 @@
+import { validateToken } from '../services/auth.service';
+
 export const BASE_URL = process.env.BASE_URL || 'http://localhost:3333/api';
 
 export const API_URL = {
@@ -11,6 +13,7 @@ export const API_URL = {
     logout: `${BASE_URL}/auth/logout`,
     user: `${BASE_URL}/auth/user`,
     profile: () => `${BASE_URL}/auth/user/profile`,
+    validateToken: () => `${BASE_URL}/auth/validate-token`,
   },
   post: {
     get: `${BASE_URL}/post`,

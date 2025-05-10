@@ -8,10 +8,12 @@ const api = axios.create({
   timeout: 5000,
 });
 
+const URLS_TO_SKIP = ['login', 'register', 'validate-token'];
+
 api.interceptors.request.use(
   async (config) => {
     try {
-      if (!config.url?.includes('login') && !config.url?.includes('register')) {
+      if (config.url && !URLS_TO_SKIP.includes(config.url)) {
         const token = await getToken();
         if (token) {
           config.headers['Authorization'] = `Bearer ${token}`;

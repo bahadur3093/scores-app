@@ -51,3 +51,17 @@ export const getUserProfile = async (): Promise<{ user: any }> => {
   });
   return user.data;
 };
+
+export const validateToken = async (
+  token: string
+): Promise<{ valid: boolean }> => {
+  try {
+    const response = await api.get(API_URL.auth.user, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error validating token:', error);
+    throw error;
+  }
+};

@@ -17,12 +17,16 @@ const BlogNavigator = () => {
       <BlogStack.Screen
         name="postDetails"
         component={PostDetails}
-        options={{ headerShown: false, title: 'Post Details' }}
+        options={{ headerShown: false, title: 'Post Details', presentation: 'modal' }}
       />
       <BlogStack.Screen
         name="createPost"
         component={CreatePost}
-        options={{ headerShown: false, title: 'Create Post', presentation: 'modal' }}
+        options={{
+          headerShown: false,
+          title: 'Create Post',
+          presentation: 'modal',
+        }}
       />
     </BlogStack.Navigator>
   );
