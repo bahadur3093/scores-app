@@ -66,7 +66,7 @@ const BlogScreen = () => {
   }
 
   return (
-    <View className="relative">
+    <View className="relative flex-1">
       <View className="absolute z-40 flex justify-center items-center bottom-6 right-5 w-14 h-14">
         <View className="flex justify-center items-center bg-blue-600 w-full h-full rounded-full shadow-lg">
           <Text
@@ -89,9 +89,9 @@ const BlogScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <View className="p-4">
-          {posts &&
-            posts.length > 0 &&
-            posts.map((post) => <BlogCard key={post.id} post={post} />)}
+          {(posts &&
+            posts.length > 0) &&
+            posts.map((post) => <BlogCard key={post.postId} post={post} />)}
         </View>
       </ScrollView>
     </View>

@@ -42,6 +42,7 @@ const CreatePost = () => {
           summary: '',
           cover: '',
           author: user?.name || '',
+          authorId: user?.id || '',
         }}
         validate={(values) => {
           const errors: {
@@ -61,7 +62,6 @@ const CreatePost = () => {
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
-          console.log('Form values:', values); // Added for debugging
           try {
             await createPost(values);
             Alert.alert('Post created!');

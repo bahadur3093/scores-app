@@ -4,6 +4,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import { IPost } from '../model/Post.model';
 import { RootStackParamList } from '../types/App.types';
+import { getShortDate } from '../utils/date.util';
 
 interface IBlogCard {
   post: IPost;
@@ -17,10 +18,9 @@ const BlogCard = ({ post }: IBlogCard) => {
 
   return (
     <TouchableOpacity
-      key={post._id}
       className="mb-4 p-4 bg-white rounded-lg shadow-md"
       onPress={() => {
-        navigateToDetails(post._id);
+        navigateToDetails(post.postId);
       }}
     >
       <View className="mb-2">
@@ -37,7 +37,7 @@ const BlogCard = ({ post }: IBlogCard) => {
       <View className="flex-row justify-between items-center">
         <Text className="text-gray-500 text-sm">By {post?.author || '-'}</Text>
         <Text className="text-gray-500 text-sm">
-          {new Date(post.createdAt).toLocaleDateString()}
+          {getShortDate(post.updatedAt)}
         </Text>
       </View>
     </TouchableOpacity>

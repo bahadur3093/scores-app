@@ -15,7 +15,11 @@ const BlogStack = createStackNavigator<BlogStackParamList>();
 
 const BlogNavigator = () => {
   return (
-    <BlogStack.Navigator>
+    <BlogStack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: 'white' },
+      }}
+    >
       <BlogStack.Screen
         name="blogHome"
         component={BlogScreen}

@@ -1,6 +1,5 @@
 export interface IPost {
-  _id: string;
-  id: string;
+  postId: string;
   title: string;
   content: string;
   summary: string;
@@ -12,18 +11,22 @@ export interface IPost {
   cover: string;
 }
 export interface IComment {
-  _id: string;
+  commentId: string;
   postId: string;
   authorId: string;
+  author: string;
   content: string;
   createdAt: Date;
   updatedAt: Date;
   parentCommentId: string;
+  likes: number;
+  isLiked: boolean;
 }
 
 export interface IReply {
-  _id: string;
+  replyId: string;
   commentId: string;
+  author: string;
   authorId: string;
   content: string;
   createdAt: string;
