@@ -1,14 +1,25 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
+import TabHeader from '../components/TabHeader';
 import BlogScreen from '../screens/Blog';
 import PostDetails from '../screens/PostDetails';
 import CreatePost from '../screens/CreatePost';
 
-const BlogStack = createStackNavigator();
+export type BlogStackParamList = {
+  blogHome: undefined;
+  postDetails: { postId: string };
+  createPost: undefined;
+};
+
+const BlogStack = createStackNavigator<BlogStackParamList>();
 
 const BlogNavigator = () => {
   return (
-    <BlogStack.Navigator>
+    <BlogStack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: 'white' },
+      }}
+    >
       <BlogStack.Screen
         name="blogHome"
         component={BlogScreen}
@@ -17,16 +28,22 @@ const BlogNavigator = () => {
       <BlogStack.Screen
         name="postDetails"
         component={PostDetails}
-        options={{ headerShown: false, title: 'Post Details', presentation: 'modal' }}
+        options={({ navigation }) => ({
+          header: () => (
+            <TabHeader navigation={navigation} title="Post Details" />
+          ),
+          presentation: 'modal',
+        })}
       />
       <BlogStack.Screen
         name="createPost"
         component={CreatePost}
-        options={{
-          headerShown: false,
-          title: 'Create Post',
+        options={({ navigation }) => ({
+          header: () => (
+            <TabHeader navigation={navigation} title="Create Post" />
+          ),
           presentation: 'modal',
-        }}
+        })}
       />
     </BlogStack.Navigator>
   );

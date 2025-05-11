@@ -74,7 +74,7 @@ const PostDetails = () => {
             </Text>
           </View>
         </View>
-        <BlogComment postId={post._id} />
+        <BlogComment postId={post.postId} />
       </View>
     </ScrollView>
   );

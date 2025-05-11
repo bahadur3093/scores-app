@@ -14,11 +14,11 @@ import { Picker } from '@react-native-picker/picker';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { Ionicons } from '@expo/vector-icons';
 
 import { createPost, getCategories } from '../services/post.service';
 import { pickAndUpload } from '../utils/imageUpload.utils';
 import { RootStackParamList } from '../types/App.types';
+import { useUser } from '../store/UserContext';
 
 const CreatePost = () => {
   const navigation =
@@ -30,18 +30,10 @@ const CreatePost = () => {
     staleTime: 1000 * 60 * 5,
   });
   const [pickerVisible, setPickerVisible] = useState(false);
+  const { user } = useUser();
 
   return (
-    <View className="flex-1 justify-center px-4 bg-white">
-      <Text className="text-2xl font-bold mb-6 text-center">
-        Create New Post
-      </Text>
-      <TouchableOpacity
-        className="absolute top-4 right-4 bg-red-400 rounded-full p-2"
-        onPress={() => navigation.goBack()}
-      >
-        <Ionicons name="close" size={32} color="white" />
-      </TouchableOpacity>
+    <View className="px-4 bg-white">
       <Formik
         initialValues={{
           title: '',
@@ -49,6 +41,8 @@ const CreatePost = () => {
           category: '',
           summary: '',
           cover: '',
+          author: user?.name || '',
+          authorId: user?.id || '',
         }}
         validate={(values) => {
           const errors: {
@@ -57,12 +51,14 @@ const CreatePost = () => {
             category?: string;
             summary?: string;
             cover?: string;
+            author?: string;
           } = {};
           if (!values.title) errors.title = 'Title is required';
           if (!values.content) errors.content = 'Content is required';
           if (!values.category) errors.category = 'Category is required';
           if (!values.summary) errors.summary = 'Summary is required';
           if (!values.cover) errors.cover = 'Cover is required';
+          if (!values.author) errors.author = 'Author is required';
           return errors;
         }}
         onSubmit={async (values, { resetForm }) => {
@@ -98,6 +94,14 @@ const CreatePost = () => {
             {errors.title && touched.title && (
               <Text className="text-red-500 mb-2">{errors.title}</Text>
             )}
+            <Text className="mb-1 font-medium">Author</Text>
+            <TextInput
+              className="border border-gray-300 rounded px-3 py-2 mb-2 bg-gray-100"
+              value={user?.name || ''}
+              placeholder="Author name"
+              editable={false}
+              pointerEvents="none"
+            />
 
             <Text className="mb-1 font-medium">Summary</Text>
             <TextInput

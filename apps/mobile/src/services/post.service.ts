@@ -20,7 +20,6 @@ export const getCategories = async (): Promise<ICategory[]> => {
 export const createPost = async (
   payload: IPostPayload
 ): Promise<IPostPayload> => {
-  debugger;
   const result = await api.post<IPostPayload>(API_URL.post.create, payload);
   return result.data;
 };

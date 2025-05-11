@@ -52,8 +52,8 @@ const Header = (props: DrawerContentComponentProps) => {
             className="flex-row items-center space-x-4"
             onPress={() => navigation.navigate('profile')}
           >
-            <View className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
-              <Text className="text-xl font-bold text-white">
+            <View className="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center">
+              <Text className="text-xl text-white font-bold">
                 {user.name?.replace(/[^A-Z]/g, '').toUpperCase() ||
                   user.name[0].toUpperCase()}
               </Text>
@@ -88,7 +88,7 @@ const Header = (props: DrawerContentComponentProps) => {
       </TouchableOpacity>
       <TouchableOpacity
         className="flex-row items-center my-2 p-3 bg-gray-200 rounded-lg"
-        onPress={() => navigation.navigate('blogs')}
+        onPress={() => navigation.navigate('blog')}
         disabled={!user}
       >
         <Ionicons name="book-outline" size={32} color="gray" className="mr-3" />
@@ -97,7 +97,7 @@ const Header = (props: DrawerContentComponentProps) => {
       <View className="border-t border-gray-300 mt-auto pt-4 mb-4">
         <TouchableOpacity
           disabled={!user}
-          className="flex-row items-center p-3 bg-gray-200 rounded-lg"
+          className="flex-row items-center p-3 bg-red-100 rounded-lg"
           onPress={() => {
             handleLogout();
             props.navigation.closeDrawer();
@@ -106,10 +106,10 @@ const Header = (props: DrawerContentComponentProps) => {
           <Ionicons
             name="log-out-outline"
             size={32}
-            color="gray"
+            color="red"
             className="mr-3"
           />
-          <Text className="text-black font-semibold text-lg">Logout</Text>
+          <Text className="text-red-600 font-semibold text-lg">Logout</Text>
         </TouchableOpacity>
       </View>
     </View>

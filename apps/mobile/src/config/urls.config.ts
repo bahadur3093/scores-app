@@ -1,3 +1,5 @@
+import { create } from "lodash";
+
 export const BASE_URL = process.env.BASE_URL || 'http://localhost:3333/api';
 
 export const API_URL = {
@@ -21,9 +23,12 @@ export const API_URL = {
   },
   comment: {
     getAll: (postId: string) => `${BASE_URL}/post/${postId}/comments`,
+    create: (postId: string) => `${BASE_URL}/post/${postId}/comments`,
   },
   reply: {
     getAllByCommentId: (commentId: string) =>
+      `${BASE_URL}/comments/${commentId}/reply`,
+    create: (commentId: string) =>
       `${BASE_URL}/comments/${commentId}/reply`,
   },
 };
