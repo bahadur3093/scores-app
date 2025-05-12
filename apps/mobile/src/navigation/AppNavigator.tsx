@@ -1,8 +1,7 @@
-import { ActivityIndicator, View, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useEffect, useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
 
 import Layout from '../components/Layout';
 import { isTokenValid } from '../utils/auth.utils';
@@ -12,8 +11,8 @@ import HomeScreen from '../screens/Home';
 import LoginScreen from '../screens/Login';
 import BlogNavigator from './BlogNavigator';
 import Header from '../components/Header';
-import ProfileScreen from '../screens/Profile';
 import PageHeader from '../components/PageHeader'; // Adjust the path as necessary
+import ProfileNavigator from './ProfileNavigator';
 
 const Drawer = createDrawerNavigator();
 
@@ -46,7 +45,9 @@ const AppNavigator = () => {
             screenOptions={{
               header: ({ navigation, route }) => (
                 <PageHeader
-                  title={route.name.charAt(0).toUpperCase() + route.name.slice(1)}
+                  title={
+                    route.name.charAt(0).toUpperCase() + route.name.slice(1)
+                  }
                   onMenuToggle={() => navigation.toggleDrawer()}
                 />
               ),
@@ -55,7 +56,7 @@ const AppNavigator = () => {
             <Drawer.Screen name="home" component={HomeScreen} />
             <Drawer.Screen name="blog" component={BlogNavigator} />
             <Drawer.Screen name="login" component={LoginScreen} />
-            <Drawer.Screen name="profile" component={ProfileScreen} />
+            <Drawer.Screen name="profile" component={ProfileNavigator} />
           </Drawer.Navigator>
         </Layout>
       </NavigationContainer>

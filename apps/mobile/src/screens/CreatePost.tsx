@@ -19,6 +19,8 @@ import { createPost, getCategories } from '../services/post.service';
 import { pickAndUpload } from '../utils/imageUpload.utils';
 import { RootStackParamList } from '../types/App.types';
 import { useUser } from '../store/UserContext';
+import RichTextEditor from '../components/RtcEditor';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const CreatePost = () => {
   const navigation =
@@ -82,7 +84,7 @@ const CreatePost = () => {
           errors,
           touched,
         }) => (
-          <View>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <Text className="mb-1 font-medium">Title</Text>
             <TextInput
               className="border border-gray-300 rounded px-3 py-2 mb-2"
@@ -163,17 +165,21 @@ const CreatePost = () => {
             </Modal>
 
             <Text className="mb-1 font-medium">Content</Text>
-            <TextInput
-              className="border border-gray-300 rounded px-3 py-2 mb-2 h-32 text-top"
-              onChangeText={handleChange('content')}
-              onBlur={handleBlur('content')}
-              value={values.content}
-              placeholder="Enter content"
-              multiline
-            />
+            <View className="border border-gray-300 rounded mb-2 h-[20rem]">
+              <RichTextEditor
+                value={values.content}
+                onChange={handleChange('content')}
+              />
+            </View>
             {errors.content && touched.content && (
               <Text className="text-red-500 mb-2">{errors.content}</Text>
             )}
+            <View className="mt-4 bg-yellow-100 p-3 rounded shadow-md">
+              <Text className="text-yellow-800 text-sm">
+                Note: Use the magic button above to check for grammatical errors
+                or improve your blog content! (Disabled for now)
+              </Text>
+            </View>
 
             <View className="mt-4">
               {uploadingImage ? (
@@ -222,7 +228,7 @@ const CreatePost = () => {
                 Create Post
               </Text>
             </TouchableOpacity>
-          </View>
+          </ScrollView>
         )}
       </Formik>
     </View>

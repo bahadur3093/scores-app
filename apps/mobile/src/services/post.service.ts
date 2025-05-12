@@ -23,3 +23,13 @@ export const createPost = async (
   const result = await api.post<IPostPayload>(API_URL.post.create, payload);
   return result.data;
 };
+
+export const updatePostContent = async (
+  postId: string,
+  content: string
+): Promise<IPost> => {
+  const result = await api.put<IPost>(`${API_URL.post.content(postId)}`, {
+    content,
+  });
+  return result.data;
+};

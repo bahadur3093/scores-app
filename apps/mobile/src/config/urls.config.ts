@@ -20,6 +20,7 @@ export const API_URL = {
     getById: `${BASE_URL}/post`,
     create: `${BASE_URL}/post`,
     category: `${BASE_URL}/category`,
+    content: (postId: string) => `${BASE_URL}/post/${postId}/content`,
   },
   comment: {
     getAll: (postId: string) => `${BASE_URL}/post/${postId}/comments`,

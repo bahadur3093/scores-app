@@ -11,7 +11,7 @@ interface ICommentCard {
 
 const CommentCard = ({ comment }: ICommentCard) => {
   return (
-    <View className="mt-2 flex-row items-start">
+    <View className="my-2 flex-row items-start border-b border-gray-200">
       <View className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center mr-3">
         <Text className="text-lg font-bold text-white">
           {(comment.author || 'Ghost')
@@ -28,7 +28,7 @@ const CommentCard = ({ comment }: ICommentCard) => {
               {comment.author || 'Ghost'}
             </Text>
             <Text className="text-xs text-gray-500 ml-2">
-              • {getShortDate(comment.createdAt)}
+              • {getShortDate(comment.updatedAt)}
             </Text>
           </View>
           <View className="flex-row items-center">
