@@ -1,5 +1,3 @@
-import { create } from "lodash";
-
 export const BASE_URL = process.env.BASE_URL || 'http://localhost:3333/api';
 
 export const API_URL = {

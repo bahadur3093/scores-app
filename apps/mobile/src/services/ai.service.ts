@@ -18,7 +18,7 @@ export async function streamImprovedContent(
     );
 
     onData(response.data); // full improved content
-  } catch (err: any) {
+  } catch (err: unknown) {
     if (axios.isCancel(err)) {
       console.log('Request canceled');
     } else {

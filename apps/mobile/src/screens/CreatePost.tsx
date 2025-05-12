@@ -221,7 +221,7 @@ const CreatePost = () => {
             )}
             <TouchableOpacity
               className="mt-4 bg-blue-600 rounded py-3 items-center"
-              onPress={handleSubmit as any}
+              onPress={() => handleSubmit()}
               activeOpacity={0.8}
             >
               <Text className="text-white font-semibold text-base">
