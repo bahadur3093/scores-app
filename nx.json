@@ -3,8 +3,7 @@
   "namedInputs": {
     "default": [
       "{projectRoot}/**/*",
-      "sharedGlobals",
-      "!{projectRoot}/libs/prisma/src/generated/**"
+      "sharedGlobals"
     ],
     "production": [
       "default",
@@ -61,7 +60,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/server-e2e/**/*"]
+      "exclude": []
     },
     {
       "plugin": "@nx/webpack/plugin",
