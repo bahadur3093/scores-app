@@ -81,7 +81,7 @@ const RepliesAccordion = ({ commentId }: IRepliesAccordion) => {
   }
 
   return (
-    <>
+    <View className="mb-2">
       <TouchableOpacity
         onPress={() => setReplyInputVisible(!replyInputVisible)}
         className="flex-row items-center mb-2"
@@ -100,7 +100,7 @@ const RepliesAccordion = ({ commentId }: IRepliesAccordion) => {
       )}
       {replies && replies.length > 0 && (
         <>
-          <View className="flex-row items-center justify-end mb-2">
+          <View className="flex-row items-center justify-end">
             <TouchableOpacity
               onPress={() => setRepliesVisible(!repliesVisible)}
               className="flex-row items-center"
@@ -133,7 +133,7 @@ const RepliesAccordion = ({ commentId }: IRepliesAccordion) => {
                         {reply.author || 'Ghost'}
                       </Text>
                       <Text className="text-xs text-gray-500">
-                        {getShortDate(new Date(reply.createdAt))}
+                        {getShortDate(new Date(reply.updatedAt))}
                       </Text>
                     </View>
                     <Text className="text-sm text-gray-600 mt-1">
@@ -146,7 +146,7 @@ const RepliesAccordion = ({ commentId }: IRepliesAccordion) => {
           )}
         </>
       )}
-    </>
+    </View>
   );
 };
 

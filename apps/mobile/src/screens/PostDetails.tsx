@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { Button, Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { useRoute, RouteProp } from '@react-navigation/native';
+import RenderHTML from 'react-native-render-html';
+import { useState } from 'react';
 
 import Loader from '../components/Loader';
 import FailedRequest from '../components/FailedRequest';
+import BlogComment from '../components/BlogComment';
 import { getPostById } from '../services/post.service';
 import { formatDate } from '../utils/date.util';
-import BlogComment from '../components/BlogComment';
 
 type RootStackParamList = {
   PostDetails: {
@@ -26,6 +28,12 @@ const PostDetails = () => {
     queryFn: async () => await getPostById(postId).then((res) => res),
     staleTime: 1000 * 60 * 5,
   });
+
+  const [showFullContent, setShowFullContent] = useState(false);
+
+  const toggleContent = () => {
+    setShowFullContent((prev) => !prev);
+  };
 
   if (isLoading) {
     return <Loader />;
@@ -65,7 +73,24 @@ const PostDetails = () => {
             </Text>
           </View>
           <View className="mb-4">
-            <Text className="text-gray-600">{post.content}</Text>
+            <RenderHTML
+              source={{
+                html: showFullContent
+                  ? post.content
+                  : post.content.slice(0, 500) +
+                    (post.content.length > 500 ? '...' : ''),
+              }}
+            />
+            {post.content.length > 500 && (
+              <View className="items-center mt-2">
+                <Text
+                  onPress={toggleContent}
+                  className="text-white text-center bg-blue-600 px-4 py-2 rounded-lg"
+                >
+                  {showFullContent ? 'Show Less' : 'Load More'}
+                </Text>
+              </View>
+            )}
           </View>
           <View className="mt-4">
             <Text className="text-sm text-gray-500">Author: {post.author}</Text>

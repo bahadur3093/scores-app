@@ -1,20 +1,19 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import {
   Alert,
   SafeAreaView,
   ScrollView,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { User } from '../model/Users.model';
-import Loader from '../components/Loader';
 import { formatDate } from '../utils/date.util';
 import { getUserDetails } from '../utils/auth.utils';
+import Loader from '../components/Loader';
+import RenderField from '../components/renderField.util';
 
 const ProfileScreen = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -39,29 +38,6 @@ const ProfileScreen = () => {
 
     loadUsersDetails();
   }, []);
-
-  const renderField = (
-    label: string,
-    value: string,
-    placeholder: string,
-    multiline = false
-  ) => {
-    return (
-      <View className="mb-2">
-        <Text className="text-gray-700 font-bold mb-1">{label}:</Text>
-        {isEditing ? (
-          <TextInput
-            className="border border-gray-300 rounded-lg p-2 bg-white"
-            placeholder={placeholder}
-            defaultValue={value}
-            multiline={multiline}
-          />
-        ) : (
-          <Text className="text-gray-700">{value}</Text>
-        )}
-      </View>
-    );
-  };
 
   if (isLoading) {
     return (
@@ -144,8 +120,18 @@ const ProfileScreen = () => {
                 </View>
               </View>
               <View className="flex-1">
-                {renderField('Name', user.name, 'Enter your name')}
-                {renderField('Email', user.email, 'Enter your email')}
+                {RenderField({
+                  label: 'Name',
+                  value: user.name,
+                  placeholder: 'Enter your name',
+                  isEditing,
+                })}
+                {RenderField({
+                  label: 'Email',
+                  value: user.email,
+                  placeholder: 'Enter your email',
+                  isEditing,
+                })}
               </View>
             </View>
             <View className="flex-row items-center mb-4">
@@ -159,32 +145,35 @@ const ProfileScreen = () => {
             </View>
             <View className="flex-row justify-between">
               <View className="w-1/2 pr-2">
-                {renderField(
-                  'Phone Number',
-                  '+1234567890',
-                  'Enter your phone number'
-                )}
+                {RenderField({
+                  label: 'Phone Number',
+                  value: '+1234567890',
+                  placeholder: 'Enter your phone number',
+                  isEditing,
+                })}
               </View>
               <View className="w-1/2 pl-2">
-                {renderField(
-                  'DOB',
-                  formatDate(new Date()),
-                  'Enter your date of birth'
-                )}
+                {RenderField({
+                  label: 'DOB',
+                  value: formatDate(new Date()),
+                  placeholder: 'Enter your date of birth',
+                  isEditing,
+                })}
               </View>
             </View>
-            {renderField(
-              'Bio',
-              `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
-              'Enter your bio',
-              true
-            )}
-            {renderField(
-              'Address',
-              '123 Main St, City, Country',
-              'Enter your address',
-              true
-            )}
+            {RenderField({
+              label: 'Bio',
+              value: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+              placeholder: 'Enter your bio',
+              isEditing,
+              multiline: true,
+            })}
+            {RenderField({
+              label: 'Address',
+              value: '123 Main St, City, Country',
+              placeholder: 'Enter your address',
+              isEditing,
+            })}
             {isEditing && (
               <TouchableOpacity
                 onPress={() => setIsEditing(false)}

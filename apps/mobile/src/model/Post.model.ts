@@ -8,6 +8,7 @@ export interface IPost {
   category: string;
   comments: IComment[];
   author: string;
+  authorId: string;
   cover: string;
 }
 export interface IComment {
